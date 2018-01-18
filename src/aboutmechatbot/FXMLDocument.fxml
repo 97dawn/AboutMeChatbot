@@ -23,10 +23,10 @@
             </Label>
             <ScrollPane layoutY="55.0" prefHeight="412.0" prefWidth="392.0" style="-fx-background-color: #ffffff;">
                <content>
-                  <Label alignment="TOP_LEFT" prefHeight="39.0" prefWidth="192.0" style="-fx-background-color: #d1f1b5;" text="Welcome. Which Korean celebrity do you want to know?" textOverrun="CLIP" wrapText="true" />
+                  <Label alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="50.0" prefWidth="186.0" style="-fx-background-color: #d1f1b5;" text="Welcome. Which Korean celebrity do you want to know? (format: FirstName LastName )" textOverrun="CLIP" wrapText="true" />
                </content></ScrollPane>
             <JFXTextArea layoutY="467.0" prefHeight="70.0" prefWidth="339.0" promptText="Write here" style="-fx-background-color: #ffffff; -fx-border-color: #000000;" />
-            <JFXButton fx:id="send" layoutX="339.0" layoutY="466.0" prefHeight="70.0" prefWidth="53.0" style="-fx-background-color: #000000;" text="Send" textFill="WHITE" />
+            <JFXButton fx:id="send" layoutX="339.0" layoutY="466.0" onMouseReleased="#handleButtonAction" prefHeight="70.0" prefWidth="53.0" style="-fx-background-color: #000000;" text="Send" textFill="WHITE" />
          </children>
       </Pane>
     </children>
