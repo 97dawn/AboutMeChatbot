@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="546.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aboutmechatbot.FXMLDocumentController">
+    <children>
+        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+      <Pane layoutX="6.0" layoutY="4.0" prefHeight="536.0" prefWidth="392.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="55.0" stroke="BLACK" strokeType="INSIDE" width="392.0" />
+            <Label layoutX="8.0" layoutY="5.0" prefHeight="46.0" prefWidth="236.0" text="About me chatbot" textFill="WHITE">
+               <font>
+                  <Font name="1HoonWhitecat Regular" size="27.0" />
+               </font>
+            </Label>
+            <ScrollPane layoutY="55.0" prefHeight="412.0" prefWidth="392.0" style="-fx-background-color: #ffffff;">
+               <content>
+                  <Label alignment="TOP_LEFT" prefHeight="39.0" prefWidth="192.0" style="-fx-background-color: #d1f1b5;" text="Welcome. Which Korean celebrity do you want to know?" textOverrun="CLIP" wrapText="true" />
+               </content></ScrollPane>
+            <JFXTextArea layoutY="467.0" prefHeight="70.0" prefWidth="339.0" promptText="Write here" style="-fx-background-color: #ffffff; -fx-border-color: #000000;" />
+            <JFXButton fx:id="send" layoutX="339.0" layoutY="466.0" prefHeight="70.0" prefWidth="53.0" style="-fx-background-color: #000000;" text="Send" textFill="WHITE" />
+         </children>
+      </Pane>
+    </children>
+</AnchorPane>
