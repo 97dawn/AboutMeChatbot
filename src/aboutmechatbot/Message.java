@@ -23,6 +23,7 @@ public class Message{
         label.setLayoutX(x);
         label.setLayoutY(y);
         label.setWrapText(true);
+        label.setMaxHeight(Double.MAX_VALUE);
         return label;
     }
     
@@ -31,6 +32,7 @@ public class Message{
         label.setLayoutX(x);
         label.setLayoutY(y);
         label.setWrapText(true);
+        label.setMaxHeight(Double.MAX_VALUE);
         return label;
     }
 }

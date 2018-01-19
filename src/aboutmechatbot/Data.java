@@ -13,7 +13,7 @@ public class Data {
     
     public Data(){
          celebrities = new HashMap<>();
-         //  name, image, job,birth, height,weight,youtube, instagram, twitter
+         //  name, image, job,birth, height,weight,(6)youtube, (7)instagram, (8)twitter
          String[] MinhoLee = {"Minho Lee",
          "file:images/MinhoLee.jpg",
          "Actor","1987.6.22","187cm","71kg","https://www.youtube.com/results?search_query=%EC%9D%B4%EB%AF%BC%ED%98%B8", "https://www.instagram.com/Actorleeminho/",null};
