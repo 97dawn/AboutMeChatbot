@@ -1,10 +1,9 @@
-package aboutmechatbot;
+package aboutmechatbot.data;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
- *
+ * @version 1.0
  * @author Doeun Kim
  */
 public class Data {

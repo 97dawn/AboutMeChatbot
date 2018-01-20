@@ -1,14 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package aboutmechatbot;
+package aboutmechatbot.gui;
 
-import com.jfoenix.controls.JFXButton;
+import aboutmechatbot.AboutMeChatbot;
+import aboutmechatbot.template.Message;
+import aboutmechatbot.data.Data;
 import com.jfoenix.controls.JFXTextArea;
-import com.sun.javafx.tk.FontLoader;
-import com.sun.javafx.tk.Toolkit;
+import java.awt.Desktop;
+import java.net.URI;
 import javafx.scene.image.Image;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,10 +18,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 
 /**
- *
+ * @version 1.0
  * @author Doeun Kim
  */
 public class FXMLDocumentController implements Initializable {
@@ -37,10 +33,8 @@ public class FXMLDocumentController implements Initializable {
     private ScrollPane scroll;
     @FXML
     private JFXTextArea message;
-    @FXML
-    private JFXButton send;
     private Pane pane;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         pane = new Pane();
@@ -56,6 +50,7 @@ public class FXMLDocumentController implements Initializable {
         pane.getChildren().add(greet);
         labels.add(greet);
         history.add("GREET");
+        scroll.vvalueProperty().bind(pane.heightProperty());
     }
 
     @FXML
@@ -64,22 +59,40 @@ public class FXMLDocumentController implements Initializable {
         if (history.get(history.size() - 1).equals("GREET") || history.get(history.size() - 1).equals("REWRITE")) {
             String name = message.getText();
             // UPLOAD USER'S MESSAGE
-            Message m = new Message(name+"  ");
-            Label currentLabel = m.getUserMessage(0, prevLabel.getLayoutY() + prevLabel.getHeight() +10);
+            Message m = new Message(name + "  ");
+            Label currentLabel = m.getUserMessage(0, prevLabel.getLayoutY() + prevLabel.getHeight() + 10);
             pane.getChildren().add(currentLabel);
             labels.add(currentLabel);
             history.add("CELEB_NAME");
             handleName(name);
-        } else if (history.get(history.size() - 1).equals("ASK_SNS")) {
+        } else if (history.get(history.size() - 1).equals("ASK_SNS") || history.get(history.size() - 1).equals("ASK_ANOTHER_SNS")) {
             String yn = message.getText();
             // UPLOAD USER'S MESSAGE
-            Message m = new Message(yn );
-            Label currentLabel = m.getUserMessage(0, prevLabel.getLayoutY() +20);
+            Message m = new Message(yn);
+            Label currentLabel = m.getUserMessage(0, prevLabel.getLayoutY() + 20);
             pane.getChildren().add(currentLabel);
             labels.add(currentLabel);
             history.add("ANSWER_YN");
             handleAnswerYNForSNS(yn);
-        }
+        } else if (history.get(history.size() - 1).equals("ASK_SELECT_SNS") || history.get(history.size() - 1).equals("REWRITE_FOR_SNS")) {
+            String number = message.getText();
+            // UPLOAD USER'S MESSAGE
+            Message m = new Message(number);
+            Label currentLabel = m.getUserMessage(0, prevLabel.getLayoutY() + 80);
+            pane.getChildren().add(currentLabel);
+            labels.add(currentLabel);
+            history.add("SELECT_SNS");
+            handleSNS(number);
+        } else if (history.get(history.size() - 1).equals("ASK_ANOTHER_CELEB")) {
+            String yn = message.getText();
+            // UPLOAD USER'S MESSAGE
+            Message m = new Message(yn);
+            Label currentLabel = m.getUserMessage(0, prevLabel.getLayoutY() + 20);
+            pane.getChildren().add(currentLabel);
+            labels.add(currentLabel);
+            history.add("ANSWER_YN");
+            handleYNForAnotherCeleb(yn);
+        } 
     }
 
     private void handleName(String name) {
@@ -87,7 +100,7 @@ public class FXMLDocumentController implements Initializable {
         message.setText("");
         if (name.equals("")) {
             Message m = new Message("Please write a message");
-            Label pc = m.getPCMessage(0, prevLabel.getLayoutY() +20);
+            Label pc = m.getPCMessage(0, prevLabel.getLayoutY() + 20);
             pane.getChildren().add(pc);
             labels.add(pc);
             history.add("REWRITE");
@@ -145,7 +158,7 @@ public class FXMLDocumentController implements Initializable {
 
             // ASK FOR KNOWING HIS/HER SNS
             prevLabel = (Label) labels.get(labels.size() - 1);
-            Message m = new Message("Do you want to know the celebrity's SNS? (yes/no)");
+            Message m = new Message("Do you want to know the celebrity's SNS? (Yes/No)");
             Label pc2 = m.getPCMessage(0, prevLabel.getLayoutY() + 160);
             history.add("ASK_SNS");
             pane.getChildren().add(pc2);
@@ -168,13 +181,90 @@ public class FXMLDocumentController implements Initializable {
             Label pc = m.getPCMessage(0, prevLabel.getLayoutY() + 20);
             pane.getChildren().add(pc);
             labels.add(pc);
-            history.add("ASK_ANOTHER");
+            history.add("ASK_ANOTHER_CELEB");
         } else {
-            Message m = new Message("I can't understand. Please write again");
-            Label pc = m.getPCMessage(0, prevLabel.getLayoutY() + 20 );
+            Message m = new Message("I can't understand. Please write again.");
+            Label pc = m.getPCMessage(0, prevLabel.getLayoutY() + 20);
             pane.getChildren().add(pc);
             labels.add(pc);
-            history.add("REWRITE");
+            history.add("REWRITE_FOR_SNS");
         }
+        message.setText("");
+    }
+
+    private void handleSNS(String input) {
+        Desktop desktop = Desktop.getDesktop();
+        Label prevLabel = (Label) labels.get(labels.size() - 1);
+        message.setText("");
+        Message m = null;
+        Label pc = null;
+        if (input.equals("1") || input.equals("2") || input.equals("3")) {
+            if (input.equals("1")) {
+                try {
+                    desktop.browse(new URI(info[6]));
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                }
+            } else if (input.equals("2")) {
+                if (info[7] != null) {
+                    try {
+                        desktop.browse(new URI(info[7]));
+                    } catch (Exception exc) {
+                        exc.printStackTrace();
+                    }
+                } else {
+                    m = new Message("This celebrity doesn't have instagram.");
+                    pc = m.getPCMessage(0, prevLabel.getLayoutY() + 20);
+                    pane.getChildren().add(pc);
+                    labels.add(pc);
+                }
+            } else if (input.equals("3")) {
+                if (info[8] != null) {
+                    try {
+                        desktop.browse(new URI(info[8]));
+                    } catch (Exception exc) {
+                        exc.printStackTrace();
+                    }
+                } else {
+                    m = new Message("This celebrity doesn't have twitter.");
+                    pc = m.getPCMessage(0, prevLabel.getLayoutY() + 20);
+                    pane.getChildren().add(pc);
+                    labels.add(pc);
+                }
+            }
+            prevLabel = (Label) labels.get(labels.size() - 1);
+            m = new Message("Do you want to check other SNS? (Yes/No)");
+            pc = m.getPCMessage(0, prevLabel.getLayoutY() + 20);
+            pane.getChildren().add(pc);
+            labels.add(pc);
+            history.add("ASK_ANOTHER_SNS");
+        } else { // WRONG INPUT
+            m = new Message("I can't understand. Please write again.");
+            pc = m.getPCMessage(0, prevLabel.getLayoutY() + 20);
+            pane.getChildren().add(pc);
+            labels.add(pc);
+            history.add("REWRITE_FOR_SNS_TYPE");
+        }
+    }
+    
+    private void handleYNForAnotherCeleb(String ans){
+        Label prevLabel = (Label) labels.get(labels.size() - 1);
+        if (ans.contains("yes") || ans.equals("y") || ans.contains("Yes") || ans.equals("Y")) {
+            prevLabel = (Label) labels.get(labels.size() - 1);
+             Message m = new Message("Which Korean celebrity \ndo you want to know? \n( format: FirstName LastName )");
+             Label currentLabel = m.getPCMessage(0, prevLabel.getLayoutY() + 20);
+            pane.getChildren().add(currentLabel);
+            labels.add(currentLabel);
+            history.add("GREET");
+        } else if (ans.contains("no") || ans.equals("n") || ans.contains("No") || ans.equals("N")) {
+            AboutMeChatbot.getPrimaryStage().close();
+        } else {
+            Message m = new Message("I can't understand. Please write again.");
+            Label pc = m.getPCMessage(0, prevLabel.getLayoutY() + 20);
+            pane.getChildren().add(pc);
+            labels.add(pc);
+            history.add("REWRITE_FOR_CELEB");
+        }
+        message.setText("");
     }
 }

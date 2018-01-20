@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aboutmechatbot;
+package aboutmechatbot.template;
 
 import javafx.scene.control.Label;
 
 /**
- *
+ * @version 1.0
  * @author Doeun Kim
  */
 public class Message{
