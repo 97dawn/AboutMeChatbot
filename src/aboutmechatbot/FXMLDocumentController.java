@@ -115,7 +115,7 @@ public class FXMLDocumentController implements Initializable {
                 info = celebrities.get("Boyoung Lee");
             } else if (name.contains("jico") || name.contains("Zico") || name.contains("Jico") || name.contains("jiko") || name.contains("Ziko") || name.contains("Jiko") || name.contains("zico") || name.contains("ziko")) {
                 info = celebrities.get("Jiho Woo");
-            } else if (name.contains("dragon") || name.contains("gd") || name.contains("GD") || name.contains("Dragon")) {
+            } else if (name.contains("g dragon") || name.contains("gd") || name.contains("GD") || name.contains("G Dragon")|| name.contains("GDragon")|| name.contains("gdragon")) {
                 info = celebrities.get("Jiyong Kwon");
             } else if (name.contains("sunmi") || name.contains("Sunmi") || name.contains("Seonmi") || name.contains("seonmi")) {
                 info = celebrities.get("Sunmi Lee");
@@ -170,13 +170,13 @@ public class FXMLDocumentController implements Initializable {
 
     private void handleAnswerYNForSNS(String ans) {
         Label prevLabel = (Label) labels.get(labels.size() - 1);
-        if (ans.contains("yes") || ans.equals("y") || ans.contains("Yes") || ans.equals("Y")) {
+        if (ans.contains("yes") || ans.contains("Yes")) {
             Message m = new Message("Please type the corresponding number\n\n1. Youtube\n2. Instagram\n3. Twitter");
             Label pc = m.getPCMessage(0, prevLabel.getLayoutY() + 20);
             pane.getChildren().add(pc);
             labels.add(pc);
             history.add("ASK_SELECT_SNS");
-        } else if (ans.contains("no") || ans.equals("n") || ans.contains("No") || ans.equals("N")) {
+        } else if (ans.contains("no") || ans.contains("No") ) {
             Message m = new Message("Do you want to search another Korean celebrity? (Yes/No)");
             Label pc = m.getPCMessage(0, prevLabel.getLayoutY() + 20);
             pane.getChildren().add(pc);
@@ -249,14 +249,14 @@ public class FXMLDocumentController implements Initializable {
     
     private void handleYNForAnotherCeleb(String ans){
         Label prevLabel = (Label) labels.get(labels.size() - 1);
-        if (ans.contains("yes") || ans.equals("y") || ans.contains("Yes") || ans.equals("Y")) {
+        if (ans.contains("yes") ||  ans.contains("Yes")) {
             prevLabel = (Label) labels.get(labels.size() - 1);
              Message m = new Message("Which Korean celebrity \ndo you want to know? \n( format: FirstName LastName )");
              Label currentLabel = m.getPCMessage(0, prevLabel.getLayoutY() + 20);
             pane.getChildren().add(currentLabel);
             labels.add(currentLabel);
             history.add("GREET");
-        } else if (ans.contains("no") || ans.equals("n") || ans.contains("No") || ans.equals("N")) {
+        } else if (ans.contains("no") || ans.contains("No") ) {
             AboutMeChatbot.getPrimaryStage().close();
         } else {
             Message m = new Message("I can't understand. Please write again.");
