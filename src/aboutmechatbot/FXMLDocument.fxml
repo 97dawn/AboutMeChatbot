@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="546.0" prefWidth="455.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aboutmechatbot.FXMLDocumentController">
+    <children>
+      <Pane layoutX="6.0" layoutY="4.0" prefHeight="536.0" prefWidth="442.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="55.0" stroke="BLACK" strokeType="INSIDE" width="441.0" />
+            <Label layoutX="8.0" layoutY="5.0" prefHeight="46.0" prefWidth="236.0" text="About me chatbot" textFill="WHITE">
+               <font>
+                  <Font name="1HoonWhitecat Regular" size="27.0" />
+               </font>
+            </Label>
+            <ScrollPane fx:id="scroll" layoutY="55.0" prefHeight="412.0" prefWidth="441.0" style="-fx-background-color: #ffffff;" />
+            <JFXTextArea fx:id="message" focusColor="WHITE" layoutY="467.0" prefHeight="70.0" prefWidth="388.0" promptText="Write here" style="-fx-background-color: #ffffff; -fx-border-color: #000000;" />
+            <JFXButton fx:id="send" layoutX="388.0" layoutY="467.0" onAction="#handleButtonAction" prefHeight="70.0" prefWidth="53.0" style="-fx-background-color: #000000;" text="Send" textFill="WHITE" />
+         </children>
+      </Pane>
+    </children>
+</AnchorPane>

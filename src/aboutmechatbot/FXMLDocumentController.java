@@ -1,4 +1,4 @@
-package aboutmechatbot.gui;
+package aboutmechatbot;
 
 import aboutmechatbot.AboutMeChatbot;
 import aboutmechatbot.template.Message;
